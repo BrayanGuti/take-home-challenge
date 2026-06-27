@@ -15,7 +15,6 @@ jobs:
           DATABASE_NAME: usersdb_test
           DATABASE_SYNC: true
           POKEMON_API_URL: https://pokeapi.co/api/v2
-      # Service container: postgres corre en paralelo al contenedor principal
       - image: cimg/postgres:15.0
         environment:
           POSTGRES_USER: postgres
@@ -47,8 +46,15 @@ jobs:
           name: Build
           command: pnpm run build
       - run:
-          name: Run e2e tests
-          command: pnpm run test:e2e
+          name: Run e2e tests with coverage
+          command: pnpm run test:cov
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+      - store_test_results:
+          path: coverage
+      - coveralls/upload:
+          path_to_lcov: coverage/lcov.info
 
 workflows:
   build_test_deploy:

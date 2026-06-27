@@ -8,5 +8,11 @@
   },
   "moduleNameMapper": {
     "^src/(.*)$": "<rootDir>/src/$1"
-  }
+  },
+  "collectCoverageFrom": [
+    "src/**/*.(t|j)s",
+    "!src/**/*.module.ts",
+    "!src/main.ts"
+  ],
+  "coverageReporters": ["lcov", "text-summary"]
 }

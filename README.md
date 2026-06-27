@@ -1,4 +1,4 @@
-# Cursor Backend Challenge
+# Backend Challenge
 
 You have to build a microservice that exposes a REST api with two different
 tables, users and states. Both tables should be open to creation, deletion,
