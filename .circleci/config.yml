@@ -53,6 +53,7 @@ jobs:
           destination: coverage
       - store_test_results:
           path: coverage
+      - coveralls/upload
 
 workflows:
   build_test_deploy:
