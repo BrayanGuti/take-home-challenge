@@ -53,8 +53,6 @@ jobs:
           destination: coverage
       - store_test_results:
           path: coverage
-      - coveralls/upload:
-          path_to_lcov: coverage/lcov.info
 
 workflows:
   build_test_deploy:
