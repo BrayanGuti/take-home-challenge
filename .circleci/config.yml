@@ -1,0 +1,49 @@
+version: 2.1
+
+jobs:
+  build_and_test:
+    docker:
+      - image: cimg/node:20.11.1
+        environment:
+          DATABASE_HOST: localhost
+          DATABASE_PORT: 5432
+          DATABASE_USER: postgres
+          DATABASE_PASSWORD: postgres
+          DATABASE_NAME: usersdb_test
+          DATABASE_SYNC: true
+          POKEMON_API_URL: https://pokeapi.co/api/v2
+      # Service container: postgres corre en paralelo al contenedor principal
+      - image: cimg/postgres:15.0
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: usersdb_test
+    steps:
+      - checkout
+      - run:
+          name: Install pnpm
+          command: corepack enable && corepack prepare pnpm@latest --activate
+      - restore_cache:
+          keys:
+            - pnpm-deps-{{ checksum "pnpm-lock.yaml" }}
+      - run:
+          name: Install dependencies
+          command: pnpm install --frozen-lockfile
+      - save_cache:
+          key: pnpm-deps-{{ checksum "pnpm-lock.yaml" }}
+          paths:
+            - ~/.local/share/pnpm/store
+      - run:
+          name: Wait for Postgres
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Build
+          command: pnpm run build
+      - run:
+          name: Run e2e tests
+          command: pnpm run test:e2e
+
+workflows:
+  build_test_deploy:
+    jobs:
+      - build_and_test

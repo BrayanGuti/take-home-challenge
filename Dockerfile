@@ -1,17 +1,20 @@
 FROM node:24.15.0-alpine
 
-
 WORKDIR /app
 
-COPY package.json .
+# Habilitar pnpm via corepack (incluido en Node)
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
-RUN npm install
+# Copiar manifiestos primero para aprovechar la cache de Docker
+COPY package.json pnpm-lock.yaml ./
+
+RUN pnpm install --frozen-lockfile
 
 # Copy source code
 COPY . .
 
 # Build the application
-RUN npm run build
+RUN pnpm run build
 
 RUN ls -la
 
