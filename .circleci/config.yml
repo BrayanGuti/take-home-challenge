@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: cimg/node:20.11.1
         environment:
-          DATABASE_HOST: localhost
+          DATABASE_HOST: 0.0.0.0
           DATABASE_PORT: 5432
           DATABASE_USER: postgres
           DATABASE_PASSWORD: postgres
@@ -22,7 +22,7 @@ jobs:
       - checkout
       - run:
           name: Install pnpm
-          command: corepack enable && corepack prepare pnpm@latest --activate
+          command: npm install -g pnpm
       - restore_cache:
           keys:
             - pnpm-deps-{{ checksum "pnpm-lock.yaml" }}
