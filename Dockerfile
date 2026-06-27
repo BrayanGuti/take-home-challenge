@@ -8,7 +8,7 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 # Copiar manifiestos primero para aprovechar la cache de Docker
 COPY package.json pnpm-lock.yaml ./
 
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
 # Copy source code
 COPY . .

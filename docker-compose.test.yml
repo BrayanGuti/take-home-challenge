@@ -19,7 +19,7 @@ services:
       - DATABASE_NAME=usersdb
       - DATABASE_SYNC=true
       - POKEMON_API_URL=https://pokeapi.co/api/v2
-    restart: 'no'
+    restart: unless-stopped
 
   db:
     image: postgres:15
