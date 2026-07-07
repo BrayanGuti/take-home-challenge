@@ -12,11 +12,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - DATABASE_HOST=db
-      - DATABASE_PORT=5432
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=postgres
-      - DATABASE_NAME=usersdb
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/usersdb
       - DATABASE_SYNC=true
       - POKEMON_API_URL=https://pokeapi.co/api/v2
     restart: unless-stopped

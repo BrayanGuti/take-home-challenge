@@ -8,15 +8,15 @@ import { ConfigService } from '@nestjs/config';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         type: 'postgres',
-        host: config.get<string>('DATABASE_HOST'),
-        port: config.get<number>('DATABASE_PORT'),
-        database: config.get<string>('DATABASE_NAME'),
-        username: config.get<string>('DATABASE_USER'),
-        password: config.get<string>('DATABASE_PASSWORD'),
+        url: config.get<string>('DATABASE_URL'),
+        ssl:
+          config.get('NODE_ENV') === 'production'
+            ? { rejectUnauthorized: false }
+            : false,
         autoLoadEntities: true,
-        synchronize: true,
+        synchronize: config.get<string>('DATABASE_SYNC') === 'true',
         extra: {
-          max: config.get<number>('DB_POOL_MAX'),
+          max: config.get<number>('DB_POOL_MAX') ?? 5,
         },
       }),
     }),
