@@ -8,7 +8,9 @@ import { ConfigService } from '@nestjs/config';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         type: 'postgres',
-        url: config.get<string>('DATABASE_URL'),
+        url:
+          config.get<string>('SCHEMATOGO_URL') ??
+          config.get<string>('DATABASE_URL'),
         ssl:
           config.get('NODE_ENV') === 'production'
             ? { rejectUnauthorized: false }
