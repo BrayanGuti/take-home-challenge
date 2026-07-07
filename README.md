@@ -12,7 +12,7 @@ or update. Every request must only accept this `Content-type: application/json`.
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/63qNnZv8WhEaxhrF688f7i/2wHpFDCBA7qXzmbcK8Dzhc/tree/main.svg?style=svg&circle-token=CCIPRJ_Rjb2NX5mS98YqjUgaDMJ2c_20b6d5506439315bf1ead395a8493e35f4f82427)](https://dl.circleci.com/status-badge/redirect/circleci/63qNnZv8WhEaxhrF688f7i/2wHpFDCBA7qXzmbcK8Dzhc/tree/main)
 
-[![Coverage Status](https://coveralls.io/repos/github/yaritaft/cursor-backend-challenge/badge.svg)](https://coveralls.io/github/yaritaft/cursor-backend-challenge)
+[![Coverage Status](https://coveralls.io/repos/github/BrayanGuti/take-home-challenge/badge.svg?branch=main)](https://coveralls.io/github/BrayanGuti/take-home-challenge?branch=main)
 
 ### How to run locally coveralls
 
